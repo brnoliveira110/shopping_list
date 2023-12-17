@@ -1,5 +1,5 @@
 'use client'
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 export type Item = {
     id: string;
@@ -18,14 +18,17 @@ export type ItemsContext = {
 export const itemsContext = createContext<ItemsContext | null>(null);
 
 export function ItemsProvider({ children }: { children: ReactNode }) {
-    const [items, setItems] = useState<Item[]>(() => {
+
+    const [items, setItems] = useState<Item[]>([]);
+
+    useEffect(() => {
         try {
-            const newItems = localStorage.getItem("items") || "[]";
-            return JSON.parse(newItems) as Item[]
+            const storedItems = localStorage.getItem("items") || "[]";
+            setItems(JSON.parse(storedItems) as Item[]);
         } catch (e) {
-            return []
+            console.error("Erro ao carregar itens do localStorage", e);
         }
-    })
+    }, []);
 
     function handleAddItem(itemName: string) {
         setItems((prev) => {
