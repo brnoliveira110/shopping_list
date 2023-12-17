@@ -8,9 +8,9 @@ const Navbar = () => {
 
     return (
         <nav>
-            <Link href="/" className={(itemsFilter === null) ? 'list' : ''}>Geral</Link>
+            <Link href="/" className={(itemsFilter === null) ? 'list' : ''}>Histórico</Link>
             <Link href="/?items=list" className={itemsFilter === 'list' ? 'list' : ''}>Lista</Link>
-            <Link href="/?items=purchased" className={itemsFilter === 'purchased' ? 'list' : ''}>Comprado</Link>
+            <Link href="/?items=purchased" className={itemsFilter === 'purchased' ? 'list' : ''}>Carrinho</Link>
         </nav>
     )
 }
